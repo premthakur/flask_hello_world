@@ -1,0 +1,16 @@
+# helmfile.yaml
+
+
+releases:
+  - name: flask-app
+    chart: ./flask-app  # Path to your Helm chart
+    namespace: default
+    values:
+      - image:
+          repository: premthakur/flask_hello_world  # Local Docker image for Flask app
+          tag: latest  # Specify the image tag
+          pullPolicy: Never  # Use Never to ensure it uses the local image
+      - replicaCount: 1 # Number of replicas
+      - service:
+          type: NodePort
+          port: 5000
